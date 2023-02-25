@@ -14,9 +14,13 @@ config/name="Shape-Royale"
 run/main_scene="res://Scenes/Ai.tscn"
 config/icon="res://icon.png"
 
-[autoload]
+[gdnative]
 
-Ai="*res://Scenes/Ai.tscn"
+singletons=[ "res://pythonscript.gdnlib" ]
+
+[global]
+
+"debug drawing"=false
 
 [gui]
 

@@ -1,12 +1,13 @@
 extends Area2D
 
-var p_name = p_name
+var p_name = p_name #parent name
 
 func _on_Bullet_body_entered(body):
-	print(body.name)
-	print(p_name)
+	#print(body.name)
+	#print(p_name)
 	if body.name != p_name:
 		body.die()
+		queue_free()
 
 var time : int = 0
 var speed : int = 400
@@ -15,7 +16,7 @@ var dir = Vector2(0, 0)
 var target = target
 
 func _ready():
-	print(target)
+	#print(target)
 	dir = target - position
 	dir = dir.normalized()
 
