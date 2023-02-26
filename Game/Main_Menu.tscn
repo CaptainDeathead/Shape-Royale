@@ -135,6 +135,16 @@ text = "Health: 4 Hits
 Rate of Fire: 1 Shot Per 0.5 Seconds
 Speed: Normal"
 
+[node name="VersionLabel" type="Label" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -142.0
+margin_top = -14.0
+margin_right = -54.0
+text = "Version: 1.0.0"
+
 [connection signal="pressed" from="Ai" to="." method="_on_Ai_pressed"]
 [connection signal="pressed" from="Join" to="." method="_on_Join_pressed"]
 [connection signal="pressed" from="Host" to="." method="_on_Host_pressed"]
