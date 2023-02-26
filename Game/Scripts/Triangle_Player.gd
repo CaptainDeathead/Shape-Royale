@@ -45,8 +45,12 @@ func _physics_process(delta):
 	if Input.is_action_pressed("right"):
 		vel.x += speed
 	if Input.is_action_pressed("shoot") and can_shoot:
-		shoot(mouse_pos)
+		shoot(mouse_pos + vel / 2)
 		can_shoot = false
+	if Input.is_action_just_pressed("escape") and $CanvasLayer.get_child(0).visible == false:
+		$CanvasLayer.get_child(0).show()
+	elif Input.is_action_just_pressed("escape") and $CanvasLayer.get_child(0).visible == true:
+		$CanvasLayer.get_child(0).hide()
 
 	time += 1
 	if time >= 40:
@@ -94,3 +98,11 @@ func update_total_enemies(num_enemies):
 	var label = $Label
 	if label != null:
 		label.text = "Total Players: " + str(num_enemies)
+
+func _on_ContinueButton_pressed():
+	$CanvasLayer.get_child(0).hide()
+
+func _on_QuitButton_pressed():
+	$CanvasLayer.get_child(0).hide()
+	Autoload.current_player = "Square"
+	get_tree().change_scene("res://Main_Menu.tscn")
