@@ -6,8 +6,10 @@ func _on_Bullet_body_entered(body):
 	#print(body.name)
 	#print(p_name)
 	if body.name != p_name:
-		body.die()
-		queue_free()
+		if body.name == "Square_Player" or "Enemy" in body.name:
+			body.health -= 25
+			body.hit()
+			queue_free()
 
 var time : int = 0
 var speed : int = 400

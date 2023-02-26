@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 onready var player = get_node("../Square_Player")
 var Bullet = preload("res://Bullet.tscn")
+onready var Ui = get_node("/root/Ai/CanvasLayer/UI")
 
 var time : int = 0
 
@@ -9,6 +10,7 @@ var targets : Array = []
 var target : Vector2
 var posible_targets : Array = []
 var num : int = 0
+var health : int = 100
 
 func _ready():
 	for node in get_tree().get_nodes_in_group("targets"):
@@ -22,24 +24,43 @@ func spawn_bullet(target):
 	bullet.target = target
 	bullet.p_name = self.name
 	get_parent().add_child(bullet)
+	
+func hit():
+	var tween = Tween.new()
+	add_child(tween)
+	
+	# Interpolate the scale property over 0.2 seconds
+	tween.interpolate_property($SquareSprite, "scale", $SquareSprite.scale, $SquareSprite.scale * 1.5, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	tween.interpolate_property($SquareSprite, "scale", $SquareSprite.scale * 1.5, $SquareSprite.scale, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	
+	# Start the tween
+	tween.start()
 
 func _process(delta):
+
+	targets = []
+
+	for node in get_tree().get_nodes_in_group("targets"):
+		if node != self:
+			targets.append(node)
 
 	# using if statement check for error
 	if target == null or Vector2(0,0) or target.length() == 0:
 		targets.shuffle()
 		for t in targets:
-			if (t.position - position).length() < 1000:
-				posible_targets.append(t)
-				num = rand_range(0, posible_targets.size())
+			posible_targets.append(t)
+			num = rand_range(0, posible_targets.size())
+			if is_instance_valid(posible_targets[num]):
 				target = posible_targets[num].position
-				#target = t.position
+				posible_targets = []
 			else:
-				target = Vector2(rand_range(0, 4000), rand_range(0, 4000))
+				targets.remove(posible_targets[num])
+				posible_targets = []
+				
 	else:
 		pass
 
-	print(target)
+	#print(target)
 	
 	var direction = target - position
 	var distance = direction.length()
@@ -54,15 +75,39 @@ func _process(delta):
 	time += 1
 
 	# if the enemy is close enough to the player, kill the player
-	if distance < 1000 and time > 75:
+	if distance < 1000 and time > 50:
 		spawn_bullet(target)
+		# using if statement check for error
+		targets.shuffle()
+		for t in targets:
+			posible_targets.append(t)
+			num = rand_range(0, posible_targets.size())
+			if is_instance_valid(posible_targets[num]):
+				target = posible_targets[num].position
+				posible_targets = []
+			else:
+				targets.remove(posible_targets[num])
+				posible_targets = []
+		print("New target: " + str(target))
 		time = 0
 
+	if health <= 0:
+		die()
+
 func die():
-	# make it invisible
-	set_process(false)
-	set_visible(false)
-	# remove it from the targets group
+	$Player_Trail.hide()
+	var tween = Tween.new()
+	tween.interpolate_property(self, "scale", self.scale, Vector2(0, 0), 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	add_child(tween)
+	tween.start()
+	yield(get_tree().create_timer(2.0), "timeout")
+	on_tween_complete()
+
+func on_tween_complete():
 	if "targets" in get_groups():
 		remove_from_group("targets")
+	get_parent().total_enemys -= 1
+	print("Total enemys: " + str(get_parent().total_enemys))
+	Ui.update_players(get_parent().total_enemys)
+	print("DED")
 	queue_free()

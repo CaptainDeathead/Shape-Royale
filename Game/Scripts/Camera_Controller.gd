@@ -1,7 +1,6 @@
 extends Camera2D
 
-onready var player = get_node("../Square_Player")
-var time = 0
+onready var player = get_node("/root/Ai/Square_Player")
 
 func _process(delta):
 	# make the camera follow the player

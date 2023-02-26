@@ -10,3 +10,7 @@ func _on_Join_pressed():
 
 func _on_Host_pressed():
 	get_tree().change_scene("res://Scenes/host.tscn")
+
+
+func _on_Quit_pressed():
+	get_tree().quit()

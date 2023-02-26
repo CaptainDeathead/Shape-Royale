@@ -11,8 +11,18 @@ config_version=4
 [application]
 
 config/name="Shape-Royale"
-run/main_scene="res://Scenes/Ai.tscn"
+run/main_scene="res://Main_Menu.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+Explosion="*res://Explosion.tscn"
+
+[display]
+
+window/size/resizable=false
+window/size/borderless=true
+window/size/fullscreen=true
 
 [gdnative]
 
