@@ -101,11 +101,10 @@ func die():
 	var tween = Tween.new()
 	tween.interpolate_property(self, "scale", self.scale, Vector2(0, 0), 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	add_child(tween)
+	tween.connect("tween_completed", self, "on_tween_complete")
 	tween.start()
-	yield(get_tree().create_timer(2.0), "timeout")
-	on_tween_complete()
 
-func on_tween_complete():
+func on_tween_complete(a, b):
 	if "targets" in get_groups():
 		remove_from_group("targets")
 	get_parent().total_enemys -= 1

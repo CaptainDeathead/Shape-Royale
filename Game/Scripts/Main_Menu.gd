@@ -1,16 +1,16 @@
 extends Control
 
 func _on_Ai_pressed():
-	get_tree().change_scene("res://Scenes/ai.tscn")
+	get_tree().change_scene("res://Scenes/Ai.tscn")
 
 
 func _on_Join_pressed():
-	get_tree().change_scene("res://Scenes/join.tscn")
-
+	#get_tree().change_scene("res://Scenes/join.tscn")
+	pass
 
 func _on_Host_pressed():
-	get_tree().change_scene("res://Scenes/host.tscn")
-
+	#get_tree().change_scene("res://Scenes/host.tscn")
+	pass
 
 func _on_Quit_pressed():
 	get_tree().quit()

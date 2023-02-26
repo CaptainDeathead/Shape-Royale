@@ -1,7 +1,5 @@
 extends Area2D
 
-onready var mainscene = get_node("res://Scenes/MainScene.tscn")
-
 func _on_Heath_Powerup_body_entered(body):
 	if body.name == "Player" or "Enemy" in body.name:
 		if body.health != body.max_health:
@@ -20,5 +18,7 @@ func _on_Heath_Powerup_body_entered(body):
 			tween.interpolate_property(self, "scale", self.scale, Vector2(0, 0), 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 			add_child(tween)
 			tween.start()
-			yield(get_tree().create_timer(2.0), "timeout")
-			self.queue_free()
+			tween.connect("tween_completed", self, "on_tween_complete")
+			
+func on_tween_complete(a, b):
+	self.queue_free()
