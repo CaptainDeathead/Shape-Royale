@@ -2,15 +2,15 @@ extends KinematicBody2D
 
 onready var Ui = get_node("/root/Ai/CanvasLayer/UI")
 
-var speed : int = 200
+var speed : int = 150
 var vel : Vector2 = Vector2(0,0)
 var mouse_pos = Vector2(0,0)
 var player_pos = Vector2(0,0)
 var angle = 0
 var dir = Vector2(0,0)
 var Bullet = preload("res://Bullet.tscn")
-var health : int = 4
-var max_health = 4
+var health : int = 6
+var max_health = 6
 var time : int = 0
 var can_shoot : bool = true
 
@@ -48,10 +48,10 @@ func _physics_process(delta):
 		can_shoot = false
 
 	time += 1
-	if time >= 50:
+	if time >= 75:
 		can_shoot = true
 		time = 0
-
+		
 	move_and_slide(vel)
 
 func _process(delta):
@@ -64,8 +64,8 @@ func hit():
 	add_child(tween)
 	
 	# Interpolate the scale property over 0.2 seconds
-	tween.interpolate_property($SquareSprite, "scale", $SquareSprite.scale, $SquareSprite.scale * 1.5, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	tween.interpolate_property($SquareSprite, "scale", $SquareSprite.scale * 1.5, $SquareSprite.scale, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	tween.interpolate_property($CircleSprite, "scale", $CircleSprite.scale, $CircleSprite.scale * 1.5, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	tween.interpolate_property($CircleSprite, "scale", $CircleSprite.scale * 1.5, $CircleSprite.scale, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	
 	# Start the tween
 	tween.start()

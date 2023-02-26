@@ -1,8 +1,6 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Players/Square_Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/MainScene.gd" type="Script" id=2]
-[ext_resource path="res://Scripts/Camera_Controller.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/Ui.tscn" type="PackedScene" id=4]
 
 [node name="Ai" type="Node2D"]
@@ -10,7 +8,6 @@ script = ExtResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
-script = ExtResource( 3 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -26,6 +23,3 @@ margin_top = -24702.0
 margin_right = 25491.0
 margin_bottom = 25298.0
 color = Color( 0, 0, 0, 1 )
-
-[node name="Square_Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( -4, 0 )

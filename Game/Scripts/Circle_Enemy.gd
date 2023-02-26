@@ -9,8 +9,8 @@ var targets : Array = []
 var target : Vector2
 var posible_targets : Array = []
 var num : int = 0
-var health : int = 4
-var max_health : int = 4
+var health : int = 6
+var max_health : int = 6
 
 func _ready():
 	for node in get_tree().get_nodes_in_group("targets"):
@@ -26,13 +26,12 @@ func spawn_bullet(target):
 	get_parent().add_child(bullet)
 	
 func hit():
-
 	var tween = Tween.new()
 	add_child(tween)
 	
 	# Interpolate the scale property over 0.2 seconds
-	tween.interpolate_property($SquareSprite, "scale", $SquareSprite.scale, $SquareSprite.scale * 1.5, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	tween.interpolate_property($SquareSprite, "scale", $SquareSprite.scale * 1.5, $SquareSprite.scale, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	tween.interpolate_property($CircleSprite, "scale", $CircleSprite.scale, $CircleSprite.scale * 1.5, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	tween.interpolate_property($CircleSprite, "scale", $CircleSprite.scale * 1.5, $CircleSprite.scale, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	
 	# Start the tween
 	tween.start()
@@ -76,7 +75,7 @@ func _process(delta):
 	time += 1
 
 	# if the enemy is close enough to the player, kill the player
-	if distance < 1000 and time > 50:
+	if distance < 1000 and time > 75:
 		spawn_bullet(target)
 		# using if statement check for error
 		targets.shuffle()

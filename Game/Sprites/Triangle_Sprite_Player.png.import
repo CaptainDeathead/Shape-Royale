@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Tryange_Sprite_Player.png-5badff955357dede569d8e8ad9343e1f.stex"
+path="res://.import/Triangle_Sprite_Player.png-8d5bd89598b72712f473e674c0e133e5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Tryange_Sprite_Player.png"
-dest_files=[ "res://.import/Tryange_Sprite_Player.png-5badff955357dede569d8e8ad9343e1f.stex" ]
+source_file="res://Sprites/Triangle_Sprite_Player.png"
+dest_files=[ "res://.import/Triangle_Sprite_Player.png-8d5bd89598b72712f473e674c0e133e5.stex" ]
 
 [params]
 

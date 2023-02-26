@@ -6,8 +6,8 @@ func _on_Bullet_body_entered(body):
 	#print(body.name)
 	#print(p_name)
 	if body.name != p_name:
-		if body.name == "Square_Player" or "Enemy" in body.name:
-			body.health -= 25
+		if body.name == "Player" or "Enemy" in body.name:
+			body.health -= 1
 			body.hit()
 			queue_free()
 

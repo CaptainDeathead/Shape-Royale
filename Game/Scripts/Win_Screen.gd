@@ -5,3 +5,4 @@ func _on_PlayAgainButton_pressed():
 
 func _on_BackButton_pressed():
 	get_tree().change_scene("res://Main_Menu.tscn")
+	Autoload.current_player = "Square"

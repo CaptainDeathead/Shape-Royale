@@ -16,7 +16,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-Explosion="*res://Explosion.tscn"
+Autoload="*res://Autoload.tscn"
 
 [display]
 
