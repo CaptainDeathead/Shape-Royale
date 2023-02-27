@@ -26,4 +26,4 @@ def serve_pck():
 #print the ip address of the server
 print('Server IP: ' + socket.gethostbyname(socket.gethostname()))
 
-app.run()
+app.run(host='192.168.0.30', port=1341)

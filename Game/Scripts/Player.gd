@@ -13,6 +13,7 @@ var health : int = 4
 var max_health = 4
 var time : int = 0
 var can_shoot : bool = true
+var can_play_anim : bool = true
 
 func shoot(target):
 	var bullet = Bullet.instance()
@@ -64,15 +65,23 @@ func _process(delta):
 	Ui.update_health(health, max_health)
 
 func hit():
-	var tween = Tween.new()
-	add_child(tween)
-	
-	# Interpolate the scale property over 0.2 seconds
-	tween.interpolate_property($SquareSprite, "scale", $SquareSprite.scale, $SquareSprite.scale * 1.5, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	tween.interpolate_property($SquareSprite, "scale", $SquareSprite.scale * 1.5, $SquareSprite.scale, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	
-	# Start the tween
-	tween.start()
+	if can_play_anim:
+		can_play_anim = false
+		var tween = Tween.new()
+		add_child(tween)
+		
+		# Interpolate the scale property over 0.2 seconds
+		tween.interpolate_property($SquareSprite, "scale", $SquareSprite.scale, $SquareSprite.scale * 1.5, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+		tween.interpolate_property($SquareSprite, "scale", $SquareSprite.scale * 1.5, $SquareSprite.scale, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+		tween.connect("tween_completed", self, "on_hit_tween_complete")
+		# Start the tween
+		tween.start()
+	else:
+		yield(get_tree().create_timer(1), "timeout")
+		can_play_anim = true
+
+func on_hit_tween_complete(a, b):
+	can_play_anim = true
 
 func die():
 	$Player_Trail.hide()

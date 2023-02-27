@@ -11,6 +11,7 @@ var posible_targets : Array = []
 var num : int = 0
 var health : int = 4
 var max_health : int = 4
+var can_play_anim : bool = true
 
 func _ready():
 	for node in get_tree().get_nodes_in_group("targets"):
@@ -26,16 +27,23 @@ func spawn_bullet(target):
 	get_parent().add_child(bullet)
 	
 func hit():
+	if can_play_anim:
+		can_play_anim = false
+		var tween = Tween.new()
+		add_child(tween)
+		
+		# Interpolate the scale property over 0.2 seconds
+		tween.interpolate_property($SquareSprite, "scale", $SquareSprite.scale, $SquareSprite.scale * 1.5, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+		tween.interpolate_property($SquareSprite, "scale", $SquareSprite.scale * 1.5, $SquareSprite.scale, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+		tween.connect("tween_completed", self, "on_hit_tween_complete")
+		# Start the tween
+		tween.start()
+	else:
+		yield(get_tree().create_timer(1), "timeout")
+		can_play_anim = true
 
-	var tween = Tween.new()
-	add_child(tween)
-	
-	# Interpolate the scale property over 0.2 seconds
-	tween.interpolate_property($SquareSprite, "scale", $SquareSprite.scale, $SquareSprite.scale * 1.5, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	tween.interpolate_property($SquareSprite, "scale", $SquareSprite.scale * 1.5, $SquareSprite.scale, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	
-	# Start the tween
-	tween.start()
+func on_hit_tween_complete(a, b):
+	can_play_anim = true
 
 func _process(delta):
 

@@ -25,7 +25,7 @@ func _ready():
 func _process(delta):
 	time += 1
 
-	if time > 100:
+	if time > 5000:
 		queue_free()
 
 func _physics_process(delta):
