@@ -12,6 +12,7 @@ var num : int = 0
 var health : int = 6
 var max_health : int = 6
 var can_play_anim : bool = true
+var minimap_icon = "EnemyDot"
 
 func _ready():
 	for node in get_tree().get_nodes_in_group("targets"):

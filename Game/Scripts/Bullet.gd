@@ -28,6 +28,9 @@ func _process(delta):
 	if time > 5000:
 		queue_free()
 
+	if get_parent().get_node(p_name) == null:
+		queue_free()
+
 func _physics_process(delta):
 	vel = dir * speed
 	position += vel * delta

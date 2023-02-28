@@ -12,6 +12,8 @@ var num : int = 0
 var health : int = 4
 var max_health : int = 4
 var can_play_anim : bool = true
+var minimap_icon = "EnemyDot"
+var dead : bool = false
 
 func _ready():
 	for node in get_tree().get_nodes_in_group("targets"):
@@ -103,6 +105,7 @@ func _process(delta):
 		die()
 
 func die():
+	dead = true
 	$Player_Trail.hide()
 	var tween = Tween.new()
 	tween.interpolate_property(self, "scale", self.scale, Vector2(0, 0), 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
@@ -114,7 +117,6 @@ func on_tween_complete(a, b):
 	if "targets" in get_groups():
 		remove_from_group("targets")
 	get_parent().total_enemys -= 1
-	print("Total enemys: " + str(get_parent().total_enemys))
 	Ui.update_players(get_parent().total_enemys)
 	print("DED")
 	queue_free()

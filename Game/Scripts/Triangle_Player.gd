@@ -35,15 +35,13 @@ func _physics_process(delta):
 	# take 90 degrees off the angle to make the player face the mouse
 	angle = dir.angle() + 1.5708
 	rotation = angle
+	var turn_dir = Vector2(1,0).rotated(rotation)
+	var angle_degrees = rad2deg(angle)
 
 	if Input.is_action_pressed("forward"):
-		vel.y -= speed
+		vel += dir * speed
 	if Input.is_action_pressed("backward"):
-		vel.y += speed
-	if Input.is_action_pressed("left"):
-		vel.x -= speed
-	if Input.is_action_pressed("right"):
-		vel.x += speed
+		vel -= dir * speed
 	if Input.is_action_pressed("shoot") and can_shoot:
 		shoot(mouse_pos + vel / 2)
 		can_shoot = false
@@ -51,6 +49,9 @@ func _physics_process(delta):
 		$CanvasLayer.get_child(0).show()
 	elif Input.is_action_just_pressed("escape") and $CanvasLayer.get_child(0).visible == true:
 		$CanvasLayer.get_child(0).hide()
+
+	if vel.y != 0 and vel.x != 0:
+		vel /= 1.4142
 
 	time += 1
 	if time >= 40:

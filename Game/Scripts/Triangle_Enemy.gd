@@ -12,6 +12,7 @@ var num : int = 0
 var health : int = 3
 var max_health : int = 3
 var can_play_anim : bool = true
+var minimap_icon = "EnemyDot"
 
 func _ready():
 	for node in get_tree().get_nodes_in_group("targets"):
@@ -120,4 +121,8 @@ func on_tween_complete(a, b):
 	print("Total enemys: " + str(get_parent().total_enemys))
 	Ui.update_players(get_parent().total_enemys)
 	print("DED")
+	# Remove all bullets spawned by the enemy
+	for bullete in get_tree().get_nodes_in_group(self.name):
+		bullete.queue_free()
+		print("bullet deleted")
 	queue_free()

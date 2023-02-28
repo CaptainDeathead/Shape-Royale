@@ -7,6 +7,7 @@ onready var health = preload("res://Power-Ups/Health_Powerup.tscn")
 onready var Square_Player = preload("res://Players/Square_Player.tscn")
 onready var Circle_Player = preload("res://Players/Circle_Player.tscn")
 onready var Triangle_Player = preload("res://Players/Triangle_Player.tscn")
+onready var Ui = get_node("/root/Ai/CanvasLayer/UI")
 
 var total_enemys = 100
 var killed_targets = []
@@ -85,6 +86,30 @@ func _ready():
 func _process(delta):
 	if total_enemys <= 1:
 		get_tree().change_scene("res://Scenes/Win_Screen.tscn")
+
+	var closest_distance = 99999999
+	var closest_enemy = null
+	
+	for target in get_tree().get_nodes_in_group("targets"):
+		if target.name == "Player":
+			continue
+		var distance = target.position.distance_to($Player.position)
+		if distance < closest_distance:
+			closest_distance = distance
+			closest_enemy = target
+			Ui.update_enemy(closest_distance / 8)
+
+			# Calculate direction vector
+			var direction = closest_enemy.position - $Player.position
+			direction = direction.normalized()
+			
+			Ui.set_enemy_direction(direction)
+
+	total_enemys = 0
+	for target in get_tree().get_nodes_in_group("targets"):
+			total_enemys += 1
+
+	Ui.update_enemy(total_enemys)
 
 	$Camera2D.position.x = $Player.position.x
 	$Camera2D.position.y = $Player.position.y
