@@ -5,8 +5,7 @@ func _on_Ai_pressed():
 
 
 func _on_Join_pressed():
-	#get_tree().change_scene("res://Scenes/join.tscn")
-	pass
+	get_tree().change_scene("res://lobby/lobby.tscn")
 
 func _on_Host_pressed():
 	#get_tree().change_scene("res://Scenes/host.tscn")

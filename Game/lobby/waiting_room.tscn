@@ -1,0 +1,57 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Fonts/Main_Menu_Font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://lobby/waiting_room.gd" type="Script" id=2]
+
+[node name="WaitingRoom" type="Popup" groups=["WaitingRoom"]]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -100.0
+margin_top = -123.0
+margin_right = 100.0
+margin_bottom = 209.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+margin_top = 72.0
+margin_right = 200.0
+margin_bottom = 260.0
+custom_constants/separation = 15
+
+[node name="ItemList" type="ItemList" parent="CenterContainer/VBoxContainer"]
+margin_right = 200.0
+margin_bottom = 153.0
+rect_min_size = Vector2( 200, 0 )
+custom_constants/vseparation = 10
+items = [ "Player 1", null, false, "Player 2", null, false, "Player 3", null, false, "Player 4", null, false ]
+auto_height = true
+same_column_width = true
+fixed_column_width = 200
+icon_mode = 0
+
+[node name="ReadyBtn" type="Button" parent="CenterContainer/VBoxContainer"]
+margin_top = 168.0
+margin_right = 200.0
+margin_bottom = 188.0
+text = "Ready!"
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -346.0
+margin_top = 67.0
+margin_right = 346.0
+margin_bottom = 124.0
+custom_fonts/font = ExtResource( 1 )
+text = "Welcome to the waiting room!"
