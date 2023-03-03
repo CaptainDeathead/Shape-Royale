@@ -11,7 +11,7 @@ extents = Vector2( 44, 44 )
 script = ExtResource( 2 )
 
 [node name="Player_Trail" parent="." instance=ExtResource( 3 )]
-width = 30.0
+width = 50.0
 default_color = Color( 1, 0, 0, 1 )
 
 [node name="CircleSprite" type="Sprite" parent="."]

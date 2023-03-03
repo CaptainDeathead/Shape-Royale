@@ -24,6 +24,6 @@ shape = SubResource( 1 )
 
 [node name="Player_Trail" parent="." instance=ExtResource( 3 )]
 show_behind_parent = true
-width = 30.0
+width = 50.0
 width_curve = SubResource( 2 )
 default_color = Color( 1, 0, 0, 1 )
