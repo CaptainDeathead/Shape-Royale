@@ -85,6 +85,7 @@ func _ready():
 
 func _process(delta):
 	if total_enemys <= 1:
+		yield(get_tree().create_timer(2), "timeout")
 		get_tree().change_scene("res://Scenes/Win_Screen.tscn")
 
 	var closest_distance = 99999999

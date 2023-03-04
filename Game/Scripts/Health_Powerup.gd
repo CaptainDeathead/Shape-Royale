@@ -19,6 +19,9 @@ func _on_Heath_Powerup_body_entered(body):
 			add_child(tween)
 			tween.start()
 			tween.connect("tween_completed", self, "on_tween_complete")
+
+	if body.name == "Player":
+		body.health_sound.play()
 			
 func on_tween_complete(a, b):
 	self.queue_free()

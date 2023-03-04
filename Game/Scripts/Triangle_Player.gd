@@ -15,6 +15,10 @@ var time : int = 0
 var can_shoot : bool = true
 var can_play_anim : bool = true
 
+onready var shoot_sound = get_parent().get_node("Camera2D/Shoot")
+onready var hit_sound = get_parent().get_node("Camera2D/Hit")
+onready var health_sound = get_parent().get_node("Camera2D/Health")
+
 func shoot(target):
 	var bullet = Bullet.instance()
 	bullet.position = get_global_position()
@@ -22,6 +26,7 @@ func shoot(target):
 	bullet.target = target
 	bullet.p_name = self.name
 	get_parent().add_child(bullet)
+	shoot_sound.play()
 
 func _physics_process(delta):
 	vel.x = 0
@@ -80,6 +85,8 @@ func hit():
 	else:
 		yield(get_tree().create_timer(1), "timeout")
 		can_play_anim = true
+
+	hit_sound.play()
 
 func on_hit_tween_complete(a, b):
 	can_play_anim = true
