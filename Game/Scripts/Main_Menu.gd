@@ -4,6 +4,9 @@ func _on_Ai_pressed():
 	get_tree().change_scene("res://Scenes/Ai.tscn")
 
 func _on_Quit_pressed():
+	# load the index.html file
+	var url = OS.get_executable_path().get_base_dir().plus_file("index.html")
+	OS.shell_open(url)
 	get_tree().quit()
 
 var players = ["Square", "Triangle", "Circle"]
