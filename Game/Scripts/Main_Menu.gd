@@ -38,7 +38,7 @@ func update_player_description():
 		"Circle":
 			preview_sprite.texture = preload("res://Sprites/Circle_Sprite_Player.png")
 			shape_label.text = "Circle"
-			player_description.text = "Health: 6 Hits\nRate of Fire: 1 Shot Per 0.25 Seconds\nSpeed: Slow"
+			player_description.text = "Health: 6 Hits\nRate of Fire: 1 Shot Per 0.75 Seconds\nSpeed: Slow"
 
 	Autoload.current_player = current_player
 

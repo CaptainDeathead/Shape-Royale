@@ -47,7 +47,7 @@ func _physics_process(delta):
 		vel += dir * speed
 	if Input.is_action_pressed("backward"):
 		vel -= dir * speed
-	if Input.is_action_just_pressed("shoot") and can_shoot:
+	if Input.is_action_pressed("shoot") and can_shoot:
 		shoot(mouse_pos + vel / 2)
 		can_shoot = false
 	if Input.is_action_just_pressed("escape") and $CanvasLayer.get_child(0).visible == false:
