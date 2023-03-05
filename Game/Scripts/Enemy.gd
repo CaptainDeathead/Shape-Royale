@@ -77,7 +77,7 @@ func _process(delta):
 	var distance = direction.length()
 	direction = direction.normalized()
 
-	position += direction * 200 * delta
+	move_and_slide(direction * 200)
 
 	# rotate the enemy to face the player
 	var angle = direction.angle_to(Vector2(1, 0))

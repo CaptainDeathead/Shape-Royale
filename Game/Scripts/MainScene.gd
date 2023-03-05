@@ -13,6 +13,11 @@ var total_enemys = 100
 var killed_targets = []
 
 func _ready():
+	Autoload.is_mainscene = true
+
+	Ui.get_node("PlayersLabel").show()
+	Ui.get_node("Arrow").show()
+
 	var square_enemy_instance = Square_Enemy.instance()
 	var circle_enemy_instance = Circle_Enemy.instance()
 	var triangle_enemy_instance = Triangle_Enemy.instance()

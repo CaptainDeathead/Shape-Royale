@@ -3,14 +3,6 @@ extends Control
 func _on_Ai_pressed():
 	get_tree().change_scene("res://Scenes/Ai.tscn")
 
-
-func _on_Join_pressed():
-	get_tree().change_scene("res://lobby/lobby.tscn")
-
-func _on_Host_pressed():
-	#get_tree().change_scene("res://Scenes/host.tscn")
-	pass
-
 func _on_Quit_pressed():
 	get_tree().quit()
 
@@ -49,3 +41,14 @@ func update_player_description():
 			player_description.text = "Health: 6 Hits\nRate of Fire: 1 Shot Per 0.25 Seconds\nSpeed: Slow"
 
 	Autoload.current_player = current_player
+
+
+func _on_Continue_pressed():
+	Autoload.load_data()
+
+
+func _on_New_pressed():
+	Autoload.level = 1
+	Autoload.game_data["level"] = Autoload.level
+	Autoload.save_data()
+	Autoload.load_data()

@@ -10,6 +10,8 @@ func _on_Bullet_body_entered(body):
 			body.health -= 1
 			body.hit()
 			queue_free()
+		else:
+			queue_free()
 
 var time : int = 0
 var speed : int = 400
