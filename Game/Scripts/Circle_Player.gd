@@ -43,17 +43,22 @@ func _physics_process(delta):
 	var turn_dir = Vector2(1,0).rotated(rotation)
 	var angle_degrees = rad2deg(angle)
 
-	if Input.is_action_pressed("forward"):
+	if Autoload.is_mobile == false:
+		if Input.is_action_pressed("forward"):
+			vel += dir * speed
+		if Input.is_action_pressed("backward"):
+			vel -= dir * speed
+		if Input.is_action_pressed("shoot") and can_shoot:
+			shoot(mouse_pos + vel / 2)
+			can_shoot = false
+		if Input.is_action_pressed("boost"):
+			speed = 400
+		if Input.is_action_just_pressed("escape") and $CanvasLayer.get_child(0).visible == false:
+			$CanvasLayer.get_child(0).show()
+		elif Input.is_action_just_pressed("escape") and $CanvasLayer.get_child(0).visible == true:
+			$CanvasLayer.get_child(0).hide()
+	else:
 		vel += dir * speed
-	if Input.is_action_pressed("backward"):
-		vel -= dir * speed
-	if Input.is_action_pressed("shoot") and can_shoot:
-		shoot(mouse_pos + vel / 2)
-		can_shoot = false
-	if Input.is_action_just_pressed("escape") and $CanvasLayer.get_child(0).visible == false:
-		$CanvasLayer.get_child(0).show()
-	elif Input.is_action_just_pressed("escape") and $CanvasLayer.get_child(0).visible == true:
-		$CanvasLayer.get_child(0).hide()
 
 	if vel.y != 0 and vel.x != 0:
 		vel /= 1.4142
@@ -69,6 +74,11 @@ func _process(delta):
 	if health <= 0:
 		die()
 	Ui.update_health(health, max_health)
+	
+	if Autoload.shoot == true and can_shoot:
+		shoot(mouse_pos + vel / 2)
+		Autoload.shoot = false
+		can_shoot = false
 
 func hit():
 	if can_play_anim:

@@ -3,6 +3,8 @@ extends Node
 var current_player = current_player
 var level : int = 1
 var is_mainscene : bool = false
+var is_mobile = false
+var shoot = false
 
 const SAVE_FILE = "user://save_file.save"
 var game_data = {}
@@ -16,6 +18,8 @@ func check_data():
 		get_tree().change_scene("res://Scenes/Level4.tscn")
 	elif game_data.level == 5:
 		get_tree().change_scene("res://Scenes/Level5.tscn")
+	elif game_data.level == 6:
+		get_tree().change_scene("res://Scenes/Level6.tscn")
 	else:
 		get_tree().change_scene("res://Scenes/Level1.tscn")
 		print("running")

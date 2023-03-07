@@ -29,10 +29,11 @@ func set_enemy_direction(enemy_rotation: Vector2):
 	$Arrow.position = target_position
 	$Arrow.rotation = angle - PI / 2 + PI
 
-
-
 func _ready():
 	healthbar.modulate = Color(0, 1, 0)
+	if Autoload.is_mobile == true:
+		$ShootButton.show()
+		$QuitButton.show()
 
 func update_health(health, max_health):
 	healthbar.value = int(float(health) / max_health * 100)
@@ -42,3 +43,11 @@ func update_health(health, max_health):
 		healthbar.modulate = Color(1, 1, 0)
 	if health <= max_health / 4:
 		healthbar.modulate = Color(1, 0, 0)
+
+
+func _on_ShootButton_pressed():
+	Autoload.shoot = true
+
+
+func _on_QuitButton_pressed():
+	get_tree().change_scene("res://Main_Menu.tscn")

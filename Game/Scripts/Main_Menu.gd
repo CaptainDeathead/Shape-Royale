@@ -17,6 +17,9 @@ onready var preview_sprite = parent.get_node("PreviewSprite")
 onready var shape_label = parent.get_node("ShapeLabel")
 onready var player_description = parent.get_node("StatsLabel")
 
+func _ready():
+	Autoload.is_mobile = false
+
 func _on_Left_pressed():
 	current_player_index = (current_player_index - 1) % len(players)
 	current_player = players[current_player_index]
@@ -55,3 +58,10 @@ func _on_New_pressed():
 	Autoload.game_data["level"] = Autoload.level
 	Autoload.save_data()
 	Autoload.load_data()
+
+
+func _on_CheckButton_toggled(button_pressed):
+	if button_pressed:
+		Autoload.is_mobile = true
+	else:
+		Autoload.is_mobile = false
