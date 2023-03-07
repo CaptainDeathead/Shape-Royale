@@ -72,10 +72,10 @@ func _process(delta):
 		die()
 	Ui.update_health(health, max_health)
 
-	if Autoload.shoot == true and can_shoot:
+	if Autoload.is_mobile == true and can_shoot:
 		shoot(mouse_pos + vel / 2)
-		Autoload.shoot = false
 		can_shoot = false
+		time = 0
 
 func hit():
 	if can_play_anim:
