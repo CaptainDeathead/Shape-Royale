@@ -17,9 +17,10 @@ var minimap_icon = "EnemyDot"
 var dead : bool = false
 
 func _ready():
-	for node in get_tree().get_nodes_in_group("targets"):
-		if node != self:
-			targets.append(node)
+	if Autoload.is_mainscene == true:
+		for node in get_tree().get_nodes_in_group("targets"):
+			if node != self:
+				targets.append(node)
 
 func spawn_bullet(target):
 	var bullet = Bullet.instance()
@@ -103,7 +104,7 @@ func _process(delta):
 		
 		time = 0
 
-	elif Autoload.is_mainscene == false and time > 50:
+	if Autoload.is_mainscene == false and time > 50:
 		spawn_bullet(target)
 		for t in targets:
 			target = t.position

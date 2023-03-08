@@ -21,7 +21,8 @@ func _on_Heath_Powerup_body_entered(body):
 			tween.connect("tween_completed", self, "on_tween_complete")
 
 	if body.name == "Player":
-		body.health_sound.play()
+		if !ERR_DOES_NOT_EXIST:
+			body.health_sound.play()
 			
 func on_tween_complete(a, b):
 	self.queue_free()

@@ -34,6 +34,7 @@ func _ready():
 		square_enemy_instance.name = "Enemy"
 		# add the enemy to targets group
 		square_enemy_instance.add_to_group("targets")
+		square_enemy_instance.add_to_group("enemies")
 	for i in range(circles):
 		# spawn 99 enemies in random positions
 		circle_enemy_instance = Circle_Enemy.instance()
@@ -42,6 +43,7 @@ func _ready():
 		circle_enemy_instance.name = "Enemy"
 		# add the enemy to targets group
 		circle_enemy_instance.add_to_group("targets")
+		circle_enemy_instance.add_to_group("enemies")
 	for i in range(triangles):
 		# spawn 99 enemies in random positions
 		triangle_enemy_instance = Triangle_Enemy.instance()
@@ -50,6 +52,7 @@ func _ready():
 		triangle_enemy_instance.name = "Enemy"
 		# add the enemy to targets group
 		triangle_enemy_instance.add_to_group("targets")
+		triangle_enemy_instance.add_to_group("enemies")
 
 	var health_instance = health.instance()
 	for i in range(35):

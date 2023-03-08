@@ -97,12 +97,15 @@ func _process(delta):
 			else:
 				targets.remove(posible_targets[num])
 				posible_targets = []
+		time = 0
 		
-	elif Autoload.is_mainscene == false and time > 40:
+	if time > 40:
 		spawn_bullet(target)
-		for t in targets:
-			target = t.position
-			print(t.name)
+		if Autoload.is_mainscene == false:
+			targets.shuffle()
+			for t in targets:
+				target = t.position
+				print(t.name)
 		time = 0
 
 	if health <= 0:
