@@ -4,9 +4,6 @@ func _on_Ai_pressed():
 	get_tree().change_scene("res://Scenes/Ai.tscn")
 
 func _on_Quit_pressed():
-	# load the index.html file
-	var url = OS.get_executable_path().get_base_dir().plus_file("index.html")
-	OS.navigate_to_url(url)
 	get_tree().quit()
 
 var players = ["Square", "Triangle", "Circle"]
@@ -18,7 +15,8 @@ onready var shape_label = parent.get_node("ShapeLabel")
 onready var player_description = parent.get_node("StatsLabel")
 
 func _ready():
-	Autoload.is_mobile = false
+	Autoload.load_data(false)
+	$CheckButton.pressed = Autoload.is_mobile
 
 func _on_Left_pressed():
 	current_player_index = (current_player_index - 1) % len(players)
@@ -50,18 +48,25 @@ func update_player_description():
 
 
 func _on_Continue_pressed():
-	Autoload.load_data()
+	Autoload.load_data(true)
 
 
 func _on_New_pressed():
 	Autoload.level = 1
 	Autoload.game_data["level"] = Autoload.level
 	Autoload.save_data()
-	Autoload.load_data()
+	Autoload.load_data(true)
 
 
 func _on_CheckButton_toggled(button_pressed):
 	if button_pressed:
 		Autoload.is_mobile = true
+		Autoload.game_data["is_mobile"] = true
+		Autoload.save_data()
 	else:
 		Autoload.is_mobile = false
+		Autoload.game_data["is_mobile"] = false
+		Autoload.save_data()
+
+func _process(delta):
+	Autoload.current_player = current_player

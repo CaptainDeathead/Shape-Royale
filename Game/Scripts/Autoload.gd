@@ -7,7 +7,9 @@ var is_mobile = false
 var shoot = false
 
 const SAVE_FILE = "user://save_file.save"
+const MOBILE_FILE = "user://mobile_file.save"
 var game_data = {}
+var mobile_data = {}
 
 func check_data():
 	if game_data.level == 2:
@@ -26,14 +28,20 @@ func check_data():
 		
 	# score loading
 	level = game_data.level
+	is_mobile = mobile_data.is_mobile
 
 func save_data():
 	var file = File.new()
 	file.open(SAVE_FILE, File.WRITE)
 	file.store_var(game_data)
 	file.close()
+	mobile_data = {"is_mobile": is_mobile}
+	file = File.new()
+	file.open(MOBILE_FILE, File.WRITE)
+	file.store_var(mobile_data)
+	file.close()
 	
-func load_data():
+func load_data(status):
 	var file = File.new()
 	if not file.file_exists(SAVE_FILE):
 		game_data = {
@@ -43,4 +51,17 @@ func load_data():
 	file.open(SAVE_FILE, File.READ)
 	game_data = file.get_var()
 	file.close()
-	check_data()
+	if status == true:
+		check_data()
+	else:
+		file = File.new()
+		if not file.file_exists(MOBILE_FILE):
+			mobile_data = {
+				"is_mobile": false
+			}
+			save_data()
+		mobile_data = {"is_mobile": is_mobile}
+		file.open(MOBILE_FILE, File.READ)
+		mobile_data = file.get_var()
+		file.close()
+		is_mobile = mobile_data.is_mobile

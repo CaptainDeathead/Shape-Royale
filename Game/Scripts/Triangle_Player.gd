@@ -76,9 +76,14 @@ func _process(delta):
 	Ui.update_health(health, max_health)
 
 	if Autoload.is_mobile == true and can_shoot:
-		shoot(mouse_pos + vel / 2)
-		can_shoot = false
-		time = 0
+		for enemy in get_tree().get_nodes_in_group("enemies"):
+			# find the closest enemy
+			if enemy.name != self.name:
+				if enemy.position.distance_to(self.position) < 500:
+					shoot(enemy.position)
+					can_shoot = false
+					time = 0
+					break
 
 func hit():
 	if can_play_anim:

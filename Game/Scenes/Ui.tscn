@@ -61,7 +61,6 @@ scale = Vector2( 0.01, 0.01 )
 texture = ExtResource( 4 )
 
 [node name="QuitButton" type="Button" parent="."]
-visible = false
 margin_left = 40.0
 margin_top = 36.0
 margin_right = 88.0

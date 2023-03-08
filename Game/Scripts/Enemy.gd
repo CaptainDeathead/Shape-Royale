@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 var Bullet = preload("res://Bullet.tscn")
 onready var Ui = get_node("/root/Ai/CanvasLayer/UI")
+onready var player = get_tree().get_current_scene().get_node("Player")
 
 var time : int = 0
 
@@ -86,7 +87,7 @@ func _process(delta):
 	time += 1
 
 	# if the enemy is close enough to the player, kill the player
-	if distance < 1000 and time > 50:
+	if distance < 1000 and time > 50 and Autoload.is_mainscene == true:
 		spawn_bullet(target)
 		# using if statement check for error
 		targets.shuffle()
@@ -99,6 +100,14 @@ func _process(delta):
 			else:
 				targets.remove(posible_targets[num])
 				posible_targets = []
+		
+		time = 0
+
+	elif Autoload.is_mainscene == false and time > 50:
+		spawn_bullet(target)
+		for t in targets:
+			target = t.position
+			print(t.name)
 		time = 0
 
 	if health <= 0:

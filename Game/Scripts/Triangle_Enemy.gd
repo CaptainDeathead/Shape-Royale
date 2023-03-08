@@ -85,7 +85,7 @@ func _process(delta):
 	time += 1
 
 	# if the enemy is close enough to the player, kill the player
-	if distance < 1000:
+	if distance < 1000 and Autoload.is_mainscene == true:
 		# using if statement check for error
 		targets.shuffle()
 		for t in targets:
@@ -98,9 +98,11 @@ func _process(delta):
 				targets.remove(posible_targets[num])
 				posible_targets = []
 		
-	if time >= 40:
-		# spawn a bullet in the direction that the enemy is facing
+	elif Autoload.is_mainscene == false and time > 40:
 		spawn_bullet(target)
+		for t in targets:
+			target = t.position
+			print(t.name)
 		time = 0
 
 	if health <= 0:
