@@ -22,6 +22,12 @@ func check_data():
 		get_tree().change_scene("res://Scenes/Level5.tscn")
 	elif game_data.level == 6:
 		get_tree().change_scene("res://Scenes/Level6.tscn")
+	elif game_data.level == 7:
+		get_tree().change_scene("res://Scenes/Level7.tscn")
+	elif game_data.level == 8:
+		get_tree().change_scene("res://Scenes/Level8.tscn")
+	elif game_data.level == 9:
+		get_tree().change_scene("res://Scenes/Level9.tscn")
 	else:
 		get_tree().change_scene("res://Scenes/Level1.tscn")
 		print("running")

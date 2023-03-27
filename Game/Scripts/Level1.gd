@@ -44,7 +44,7 @@ func _ready():
 		enemy_instance.name = "Enemy"
 		enemy_instance.add_to_group("enemies")
 
-	elif Autoload.level == 5 or Autoload.level == 6:
+	elif Autoload.level == 5 or Autoload.level == 6 or Autoload.level == 7:
 		var enemy_instance1 = Square_Enemy.instance()
 		add_child(enemy_instance1)
 		enemy_instance1.position = $EnemySpawn.position
@@ -55,6 +55,28 @@ func _ready():
 		enemy_instance2.position = $EnemySpawn2.position
 		enemy_instance2.name = "Enemy"
 		enemy_instance2.add_to_group("enemies")
+	
+	elif Autoload.level == 8 or Autoload.level == 9:
+		var enemy_instance1 = Square_Enemy.instance()
+		add_child(enemy_instance1)
+		enemy_instance1.position = $EnemySpawn.position
+		enemy_instance1.name = "Enemy"
+		enemy_instance1.add_to_group("enemies")
+		var enemy_instance2 = Square_Enemy.instance()
+		add_child(enemy_instance2)
+		enemy_instance2.position = $EnemySpawn2.position
+		enemy_instance2.name = "Enemy"
+		enemy_instance2.add_to_group("enemies")
+		var enemy_instance3 = Square_Enemy.instance()
+		add_child(enemy_instance3)
+		enemy_instance3.position = $EnemySpawn3.position
+		enemy_instance3.name = "Enemy"
+		enemy_instance3.add_to_group("enemies")
+		var enemy_instance4 = Triangle_Enemy.instance()
+		add_child(enemy_instance4)
+		enemy_instance4.position = $EnemySpawn4.position
+		enemy_instance4.name = "Enemy"
+		enemy_instance4.add_to_group("enemies")
 
 func _process(delta):
 	$Camera2D.position.x = $Player.position.x
