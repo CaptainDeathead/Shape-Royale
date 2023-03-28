@@ -48,9 +48,6 @@ func _physics_process(delta):
 			vel += dir * speed
 		if Input.is_action_pressed("backward"):
 			vel -= dir * speed
-		if Input.is_action_pressed("shoot") and can_shoot:
-			shoot(mouse_pos + vel / 2)
-			can_shoot = false
 		if Input.is_action_pressed("boost"):
 			speed = 400
 		if Input.is_action_just_pressed("escape") and $CanvasLayer.get_child(0).visible == false:
@@ -62,11 +59,6 @@ func _physics_process(delta):
 
 	if vel.y != 0 and vel.x != 0:
 		vel /= 1.4142
-
-	time += 1
-	if time >= 75:
-		can_shoot = true
-		time = 0
 		
 	move_and_slide(vel)
 
@@ -84,6 +76,19 @@ func _process(delta):
 					can_shoot = false
 					time = 0
 					break
+
+	if Input.is_action_pressed("shoot") and can_shoot:
+		shoot(mouse_pos)
+		can_shoot = false
+
+	if can_shoot == false:
+		time += 1
+	else:
+		time = 0
+
+	if time >= 75:
+		can_shoot = true
+		time = 0
 
 func hit():
 	if can_play_anim:

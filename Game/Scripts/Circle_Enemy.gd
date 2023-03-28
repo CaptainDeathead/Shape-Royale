@@ -25,6 +25,7 @@ func spawn_bullet(target):
 	bullet.rotation = rotation
 	bullet.target = target
 	bullet.p_name = self.name
+	bullet.parent = self
 	get_parent().add_child(bullet)
 	
 func hit():
@@ -85,7 +86,7 @@ func _process(delta):
 	time += 1
 
 	# if the enemy is close enough to the player, kill the player
-	if distance < 1000 and Autoload.is_mainscene == true:
+	if distance < 1000 and time > 75 and Autoload.is_mainscene == true:
 		spawn_bullet(target)
 		# using if statement check for error
 		targets.shuffle()
@@ -100,7 +101,7 @@ func _process(delta):
 				posible_targets = []
 		time = 0
 
-	if Autoload.is_mainscene == false and time > 50:
+	if Autoload.is_mainscene == false and time > 75:
 		spawn_bullet(target)
 		for t in targets:
 			target = t.position

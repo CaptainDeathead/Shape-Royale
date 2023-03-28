@@ -81,6 +81,10 @@ boost={
 
 pointing/emulate_touch_from_mouse=true
 
+[mono]
+
+project/assembly_name="Shape-Royale"
+
 [physics]
 
 common/enable_pause_aware_picking=true

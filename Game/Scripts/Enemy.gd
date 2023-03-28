@@ -28,6 +28,7 @@ func spawn_bullet(target):
 	bullet.rotation = rotation
 	bullet.target = target
 	bullet.p_name = self.name
+	bullet.parent = self
 	get_parent().add_child(bullet)
 	
 func hit():

@@ -1,6 +1,7 @@
 extends Area2D
 
 var p_name = p_name #parent name
+var parent = parent #parent node
 
 func _on_Bullet_body_entered(body):
 	#print(body.name)
@@ -9,6 +10,7 @@ func _on_Bullet_body_entered(body):
 		if body.name == "Player" or "Enemy" in body.name:
 			body.health -= 1
 			body.hit()
+			parent.health += 1
 			queue_free()
 		else:
 			queue_free()
