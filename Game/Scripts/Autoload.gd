@@ -5,6 +5,9 @@ var level : int = 1
 var is_mainscene : bool = false
 var is_mobile = false
 var shoot = false
+var square_enemy = preload("res://Enemys/Square_Enemy.tscn")
+var triangle_enemy = preload("res://Enemys/Triangle_Enemy.tscn")
+var circle_enemy = preload("res://Enemys/Circle_Enemy.tscn")
 
 const SAVE_FILE = "user://save_file.save"
 const MOBILE_FILE = "user://mobile_file.save"
@@ -71,3 +74,17 @@ func load_data(status):
 		mobile_data = file.get_var()
 		file.close()
 		is_mobile = mobile_data.is_mobile
+
+func spawn_enemy(enemy):
+	if enemy == "square":
+		var Enemy = square_enemy.instance()
+		add_child(Enemy)
+		Enemy.position = Vector2(rand_range(0, 10000), rand_range(0, 10000))
+	elif enemy == "triangle":
+		var Enemy = triangle_enemy.instance()
+		add_child(Enemy)
+		Enemy.position = Vector2(rand_range(0, 10000), rand_range(0, 10000))
+	elif enemy == "circle":
+		var Enemy = circle_enemy.instance()
+		add_child(Enemy)
+		Enemy.position = Vector2(rand_range(0, 10000), rand_range(0, 10000))

@@ -45,3 +45,6 @@ func update_health(health, max_health):
 
 func _on_QuitButton_pressed():
 	get_tree().change_scene("res://Main_Menu.tscn")
+
+func update_score(score):
+	$ScoreLabel.text = "Score: " + str(score)

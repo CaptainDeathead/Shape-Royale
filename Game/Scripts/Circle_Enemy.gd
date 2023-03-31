@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 var Bullet = preload("res://Bullet.tscn")
 onready var Ui = get_node("/root/Ai/CanvasLayer/UI")
+var KillPickup = preload("res://Power-Ups/KillPickup.tscn")
 
 var time : int = 0
 
@@ -13,6 +14,7 @@ var health : int = 6
 var max_health : int = 6
 var can_play_anim : bool = true
 var minimap_icon = "EnemyDot"
+var score : int = 0
 
 func _ready():
 	for node in get_tree().get_nodes_in_group("targets"):
@@ -118,12 +120,14 @@ func die():
 	add_child(tween)
 	tween.connect("tween_completed", self, "on_tween_complete")
 	tween.start()
+	yield(get_tree().create_timer(0.5), "timeout")
+	for bullet in get_children():
+		bullet.queue_free()
+	# spawn a new square enemy
+	Autoload.spawn_enemy("circle")
+	# spawn the kill pickup
+	var kill_pickup = KillPickup.instance()
+	kill_pickup.position = position
+	get_parent().add_child(kill_pickup)
 
-func on_tween_complete(a, b):
-	if "targets" in get_groups():
-		remove_from_group("targets")
-	get_parent().total_enemys -= 1
-	print("Total enemys: " + str(get_parent().total_enemys))
-	Ui.update_players(get_parent().total_enemys)
-	print("DED")
 	queue_free()

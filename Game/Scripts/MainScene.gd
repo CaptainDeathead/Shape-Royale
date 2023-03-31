@@ -15,7 +15,6 @@ var killed_targets = []
 func _ready():
 	Autoload.is_mainscene = true
 
-	Ui.get_node("PlayersLabel").show()
 	Ui.get_node("Arrow").show()
 
 	var square_enemy_instance = Square_Enemy.instance()

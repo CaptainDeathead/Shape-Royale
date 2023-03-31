@@ -14,6 +14,7 @@ var max_health = 4
 var time = 0
 var can_shoot : bool = true
 var can_play_anim : bool = true
+var score : int = 0
 
 onready var shoot_sound = get_parent().get_node("Camera2D/Shoot")
 onready var hit_sound = get_parent().get_node("Camera2D/Hit")
@@ -64,6 +65,7 @@ func _process(delta):
 	if health <= 0:
 		die()
 	Ui.update_health(health, max_health)
+	Ui.update_score(score)
 
 	if Autoload.is_mobile == true and can_shoot:
 		for enemy in get_tree().get_nodes_in_group("enemies"):
