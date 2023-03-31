@@ -85,7 +85,7 @@ func _process(delta):
 	time += 1
 
 	# if the enemy is close enough to the player, kill the player
-	if distance < 1000 and Autoload.is_mainscene == true:
+	if distance < 1000 and time > 75 and Autoload.is_mainscene == true:
 		spawn_bullet(target)
 		# using if statement check for error
 		targets.shuffle()
