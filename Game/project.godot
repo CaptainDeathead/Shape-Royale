@@ -77,6 +77,7 @@ boost={
  ]
 }
 
+<<<<<<< HEAD
 [input_devices]
 
 pointing/emulate_touch_from_mouse=true
@@ -85,6 +86,8 @@ pointing/emulate_touch_from_mouse=true
 
 project/assembly_name="Shape-Royale"
 
+=======
+>>>>>>> parent of b228914 (fixed bugs and released levels)
 [physics]
 
 common/enable_pause_aware_picking=true

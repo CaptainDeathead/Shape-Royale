@@ -55,7 +55,6 @@ func _physics_process(delta):
 			$CanvasLayer.get_child(0).show()
 		elif Input.is_action_just_pressed("escape") and $CanvasLayer.get_child(0).visible == true:
 			$CanvasLayer.get_child(0).hide()
-
 	else:
 		vel += dir * speed
 
